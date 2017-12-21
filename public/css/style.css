@@ -1,0 +1,17 @@
+button.btn.btn-danger {
+    margin-top : 10px;
+}
+
+.jumbotron{
+    background-image: url(https://media1.britannica.com/eb-media/25/93825-004-A21EC811.jpg);
+    opacity: 0.7;
+}
+
+.jumbotron-text{
+   color: black;
+
+}
+
+.navbar {
+    margin-bottom: 0;
+}
