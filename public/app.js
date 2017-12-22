@@ -8,7 +8,7 @@ $.getJSON("/articles", function(data) {
       // Display the apropos information on the page
       $("#articleSpace").append("<h2><a href='" + data[i].link + "'>" + data[i].title + "</a></h2>");
       // A button to submit a new note, with the id of the article saved to it
-      $("#articleSpace").append("<button data-id='" + data[i]._id + "' id='savenote'>Save Note</button>");
+      $("#articleSpace").append("<button data-id='" + data[i]._id + "' id='savenote'>Save Article</button>");
       // $("#articleSpace").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
       // "<div class='panel panel-default'>"
       // "<div class='panel panel-heading'>"
