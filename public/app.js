@@ -1,4 +1,3 @@
-//수정 필요 !!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 // Grab the articles as a json
@@ -7,21 +6,32 @@ $.getJSON("/articles", function(data) {
     // For each one
     for (var i = 0; i < data.length; i++) {
       // Display the apropos information on the page
-      $(".panel-heading").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+      $("#articleSpace").append("<h2><a href='" + data[i].link + "'>" + data[i].title + "</a></h2>");
+      // A button to submit a new note, with the id of the article saved to it
+      $("#articleSpace").append("<button data-id='" + data[i]._id + "' id='savenote'>Save Note</button>");
+      // $("#articleSpace").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+      // "<div class='panel panel-default'>"
+      // "<div class='panel panel-heading'>"
+      // "<h3>" "<a class='article-link' href='" + data[i].link +' ">" ' + data[i].title +' "</a>" "</h3>"
+      // "</div>"
+      // "</div>"
+      // "<div class='panel-body'>"
+
+      // "</div>"
     }
   });
   
   
   // Whenever someone clicks Scrap new articles button
   $(".btn-danger").on("click", function() {
-    $(".panel-heading").empty();
+    $("#articleSpace").empty();
     console.log("SCRAPE NEW ARTICLES")
     // Empty the notes from the note section
     $.get("/scrape", function(data){
       $.getJSON("/articles", function(data){
         for (var i = 0; i < data.length; i++) {
           // Display the apropos information on the page
-          $("#nytArticleDetails").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+          $("#articleSpace").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
         };
       });
     });

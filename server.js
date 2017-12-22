@@ -40,7 +40,7 @@ app.get("/scrape", function(req, res){
             var result = {};
 
             result.title = $(this)
-                .children("a")
+                .children("h2")
                 .text();
             result.link = $(this)
                 .children("a")
