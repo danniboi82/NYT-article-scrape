@@ -5,11 +5,16 @@ var bodyParser = require("body-parser");
 var axios = require("axios");
 var cheerio = require("cheerio");
 
+var PORT = 8080;
+
 //save express () to app variable to invoke
 var app = express();
 
+app.use(logger("dev"));
+
 //Link db schema models to variable 'db'
 var db = require("./models"); 
+
 
 //bodyParser middleware to parse information between modules
 app.use(bodyParser.urlencoded({extended: false }));
@@ -44,17 +49,59 @@ app.get("/scrape", function(req, res){
             db.Article
             .create(result)
             .then(function(dbArticle){
-                console.log("SCRAPED LIFE GOES ON~");
+                res.json("SCRAPED LIFE GOES ON~");
                 console.log(dbArticle);
+            })
+            .catch(function(err){
+                res.json(err);
             });
         });
     });
 });
 
+app.get("/articles", function(req , res){
+    db.Article
+    .find({})
+    .then(function(dbArticle) {
+        res.json(dbArticle);
+    })
+    .catch(function(err){
+        res.json(err);
+    });
+});
+
+app.get("/articles/:id", function(req, res) {
+    db.Article
+    .findOne({ _id: req.params.id })
+    .populate("note")
+    .then(function(dbArticle){
+        res.json(dbArticle);
+    })
+    .catch(function(err){
+        res.json(err);
+    });
+});
+
+//Route for posting notes related to scraped article.
+app.post("/articles/:id", function(req, res){
+    db.Note
+    .create(req.body)
+    .then(function(dbNote){
+        return db.Article.findOneAndUpdate({_id: req.params.id}, {notes: dbNote._id }, {new: true});
+    })
+    .then(function(dbArticle){
+        res.json(dbArticle);
+    })
+    .catch(function(err){
+        res.json(err);
+    });
+});
+
+
 
 
 //Set up port and make sure its listening with "WELCOME TO PORT" or throw error 
-app.listen(8080, function(err){
+app.listen(PORT, function(err){
     if (err) {
         console.log("YOU EFFED UP");
     }
