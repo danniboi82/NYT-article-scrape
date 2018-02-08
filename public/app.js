@@ -7,10 +7,13 @@ $.getJSON("/articles", function (data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
-    $("#articleSpace").append("<h2><a href='" + data[i].link + "'>" + data[i].title + "</a></h2>");
-    // A button to submit a new note, with the id of the article saved to it
-    $("#articleSpace").append("<button class='btn btn-danger save' data-id='" + data[i]._id + "' id='savenote'>Save Article</button><hr>");
-
+    $("#articleSpace").append("<div class= 'panel panel-default'><div class='panel-heading'><div class='panel-title'><h4><a href='" 
+    + data[i].link 
+    + "'>" 
+    + data[i].title 
+    + "</a></h></div></div> <div class='panel-body'> <button class='btn btn-danger save' data-id='" 
+    + data[i]._id 
+    + "' id='savenote'>Save Article</button></div></div>");
   }
 });
 
@@ -24,7 +27,13 @@ $(".btn-danger").on("click", function () {
     $.getJSON("/articles", function (data) {
       for (var i = 0; i < data.length; i++) {
         // Display the apropos information on the page
-        $("#articleSpace").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+        $("#articleSpace").append("<div class= 'panel panel-default'><div class='panel-heading'><div class='panel-title'><h4><a href='" 
+        + data[i].link 
+        + "'>" 
+        + data[i].title 
+        + "</a></h></div></div> <div class='panel-body'> <button class='btn btn-danger save' data-id='" 
+        + data[i]._id 
+        + "' id='savenote'>Save Article</button></div></div>");
       };
     });
   });
